@@ -12,11 +12,13 @@ class SignUpPage extends React.Component {
 
     // set the initial component state
     this.state = {
+      value: 1,
       errors: {},
       user: {
         email: '',
         username: '',
-        password: ''
+        password: '',
+        role:''
       }
     };
 
@@ -37,6 +39,7 @@ class SignUpPage extends React.Component {
     const name = encodeURIComponent(this.state.user.name);
     const email = encodeURIComponent(this.state.user.email);
     const password = encodeURIComponent(this.state.user.password);
+    const role = encodeURIComponent(this.state.value);
     const emailVerified = true;
     const formData = `username=${name}&email=${email}&password=${password}&emailVerified=${emailVerified}`;
 
@@ -56,7 +59,9 @@ class SignUpPage extends React.Component {
 
         // set a message
         localStorage.setItem('successMessage', "User created!");
-
+        debugger;
+       console.log(xhr.response);
+       console.log(role);
         // make a redirect
         this.context.router.replace('/login');
       } else {
@@ -88,6 +93,8 @@ class SignUpPage extends React.Component {
     });
   }
 
+
+  handleChange = (event, index, value) => this.setState({value});
   /**
    * Render the component.
    */
@@ -95,9 +102,11 @@ class SignUpPage extends React.Component {
     return (
       <SignUpForm
         onSubmit={this.processForm}
+        handleChange={this.handleChange}
         onChange={this.changeUser}
         errors={this.state.errors}
         user={this.state.user}
+        value={this.state.value}
       />
     );
   }

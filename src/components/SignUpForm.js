@@ -3,13 +3,20 @@ import { Link } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-
-
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+const styles = {
+  customWidth: {
+    width: 300,
+  },
+};
 const SignUpForm = ({
+  handleChange,
   onSubmit,
   onChange,
   errors,
   user,
+  value,
 }) => (
   <Card className="container">
     <form action="/" onSubmit={onSubmit}>
@@ -36,7 +43,21 @@ const SignUpForm = ({
           value={user.email}
         />
       </div>
-
+ <div >
+        <SelectField
+          floatingLabelText="Select role"
+          value={value}
+          name="role"
+          onChange={handleChange}
+          style={styles.customWidth}
+        >
+          <MenuItem value={1} primaryText="Plant" />
+          <MenuItem value={2} primaryText="Scheduls" />
+          <MenuItem value={3} primaryText="Metrics" />
+          
+        </SelectField>
+        
+      </div>
       <div className="field-line">
         <TextField
           floatingLabelText="Password"
@@ -58,10 +79,12 @@ const SignUpForm = ({
 );
 
 SignUpForm.propTypes = {
+  handleChange:PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 export default SignUpForm;
