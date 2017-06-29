@@ -15,7 +15,7 @@ class SignUpPage extends React.Component {
       errors: {},
       user: {
         email: '',
-        name: '',
+        username: '',
         password: ''
       }
     };
@@ -37,11 +37,12 @@ class SignUpPage extends React.Component {
     const name = encodeURIComponent(this.state.user.name);
     const email = encodeURIComponent(this.state.user.email);
     const password = encodeURIComponent(this.state.user.password);
-    const formData = `name=${name}&email=${email}&password=${password}`;
+    const emailVerified = true;
+    const formData = `username=${name}&email=${email}&password=${password}&emailVerified=${emailVerified}`;
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('post', '/auth/signup');
+    xhr.open('post', 'http://localhost:3000/api/Users');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
@@ -54,7 +55,7 @@ class SignUpPage extends React.Component {
         });
 
         // set a message
-        localStorage.setItem('successMessage', xhr.response.message);
+        localStorage.setItem('successMessage', "User created!");
 
         // make a redirect
         this.context.router.replace('/login');
@@ -62,7 +63,7 @@ class SignUpPage extends React.Component {
         // failure
 
         const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
+        errors.summary = "xhr.response.message";
 
         this.setState({
           errors
