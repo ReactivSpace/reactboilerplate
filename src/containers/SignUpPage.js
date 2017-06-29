@@ -62,6 +62,18 @@ class SignUpPage extends React.Component {
         debugger;
        console.log(xhr.response);
        console.log(role);
+        const xhr2 = new XMLHttpRequest();
+        xhr2.open('post', 'http://localhost:3000/api/RoleMappings');
+        xhr2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr2.responseType = 'json';
+        const principalType = "UserRole";
+        const principalId = xhr.response.id;
+        const roleId = role;
+        const formData2 = `principalType=${principalType}&principalId=${principalId}&roleId=${role}`;
+        
+        xhr2.send(formData2);
+
+
         // make a redirect
         this.context.router.replace('/login');
       } else {
