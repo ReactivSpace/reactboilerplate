@@ -42,7 +42,8 @@ class LoginPage extends React.Component {
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('post', '/auth/login');
+    debugger;
+    xhr.open('post', 'http://localhost:3000/api/Users/login');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
@@ -53,9 +54,9 @@ class LoginPage extends React.Component {
         this.setState({
           errors: {}
         });
-
+debugger;
         // save the token
-        Auth.authenticateUser(xhr.response.token);
+        Auth.authenticateUser(xhr.response.id);
 
 
         // change the current URL to /
@@ -65,7 +66,7 @@ class LoginPage extends React.Component {
 
         // change the component state
         const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = xhr.response.message;
+        errors.summary = xhr.response.ttl;
 
         this.setState({
           errors

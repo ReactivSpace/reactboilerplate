@@ -29,7 +29,7 @@ class DashboardPage extends React.Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         this.setState({
-          secretData: xhr.response.message
+          secretData: "Welcome to Dashboard"
         });
       }
     });
