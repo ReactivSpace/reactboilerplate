@@ -12,58 +12,139 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/expand-more';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { indigo500 } from 'material-ui/styles/colors'
 import { Tabs, Tab } from 'material-ui/Tabs';
+import Drawer from 'material-ui/Drawer';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import FontIcon from 'material-ui/FontIcon';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import {List, ListItem, makeSelectable} from 'material-ui/List';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 import Avatar from 'material-ui/Avatar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 // import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
+import {spacing, typography} from 'material-ui/styles';
+import {white, blue600} from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
+import ViewModule from 'material-ui/svg-icons/action/view-module';
 const titleStyles = {
   title: {
     cursor: 'pointer', color: '#2196F3'
 
   },
   color: {
-    color: indigo500
-  }
+    color: blue600
+  },  logo: {
+      cursor: 'pointer',
+      fontSize: 22,
+      color: typography.textFullWhite,
+      lineHeight: `${spacing.desktopKeylineIncrement}px`,
+      fontWeight: typography.fontWeightLight,
+      backgroundColor: blue600,
+      paddingLeft: 40,
+      
+      height: 56,
+    },
+    menuItem: {
+      color: white,
+      fontSize: 14
+    },
+    avatar: {
+      div: {
+        padding: '15px 0 20px 15px',
+        height: 45
+      },
+      icon: {
+        float: 'left',
+        display: 'block',
+        marginRight: 15,
+        boxShadow: '0px 0px 0px 8px rgba(0,0,0,0.2)'
+      },
+      span: {
+        paddingTop: 12,
+        display: 'block',
+        color: 'white',
+        fontWeight: 300,
+        textShadow: '1px 1px #444'
+      },
+       iconsRightContainer: {
+        marginLeft: 20,
+        margin:9
+      }
+    }
 };
+
 const Base = ({ children }) => (
   <div>
 
    
   <Paper zDepth={1}>
-          <Toolbar    style={{backgroundColor:'#ffffff'}}>
+          <Toolbar  style={titleStyles.logo}>
            {/*<IconButton><NavigationClose/></IconButton>*/}
             <ToolbarGroup firstChild={true}>
-                <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGc_GGDySy1rSwoAhDoxTDOragNChQ15raeQRCmnbXR9_Y_1VTuA" style={{alignSelf: 'center',padding:'0',margin:'5'}} />
-              <ToolbarTitle text="Ashvin"/>
-              <FlatButton style={{alignSelf: 'center',margin:'5'}} containerElement={<Link to="/schedule" />} label="Schedule" />
-              <FlatButton style={{alignSelf: 'center',margin:'5'}} containerElement={<Link to="/upload" />} label="Upload" />
-              <FlatButton style={{alignSelf: 'center',margin:'5'}} containerElement={<Link to="/metrics" />} label="Metrics" />
-            </ToolbarGroup>
-            <ToolbarGroup>
-
-         
-               
-              {Auth.isUserAuthenticated() ? (
-       
-    
-        
-        <div className="top-bar-right">
-        <RaisedButton style={{alignSelf: 'center',margin:'5'}} containerElement={<Link to="/logout" />} label="Logout" warning/>
+            <div style={titleStyles.logo}>
+          User Admin App
         </div>
+     </ToolbarGroup>
+            {Auth.isUserAuthenticated() ? (
+                 <ToolbarGroup>
+          <Drawer width={300}>
+            <div style={titleStyles.logo}>
+          User Admin App
+        </div>
+        <div style={titleStyles.avatar.div}>
+          <Avatar src="https://image.flaticon.com/icons/png/512/78/78373.png"
+                  size={50}
+                  style={titleStyles.avatar.icon}/>
+          <span style={titleStyles.avatar.span}>Hello! Ashwin</span>
+        </div>
+            <MenuItem>  
+            <ListItem value={1}primaryText="Schedule"nestedItems={[
+             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
+             <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
+             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>
+            ]}/>
+            <ListItem value={1}primaryText="Upload"nestedItems={[
+            <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
+            <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
+            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
+            ]}/>
+            <ListItem value={1}primaryText="Metrics"nestedItems={[
+             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
+             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
+            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,]}/>
+           </MenuItem>
+         </Drawer>
+           <div style={titleStyles.iconsRightContainer}>
+                  <IconMenu color={white}
+                            iconButtonElement={
+                              <IconButton><ViewModule color={white}/></IconButton>
+                            }
+                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                  >
+                    <MenuItem key={1} primaryText="Application 1"/>
+                    <MenuItem key={2} primaryText="Application 2"/>
+                    <MenuItem key={3} primaryText="Application 3"/>
+                  </IconMenu>
+            <IconMenu color={white}
+                            iconButtonElement={
+                              <IconButton>
+                                <MoreVertIcon color={white}/></IconButton>
+                            }
+                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                  >
+            <MenuItem containerElement={<Link to="/profile" />}  primaryText="Profile" />
+            <MenuItem containerElement={<Link to="/logout" />} primaryText="Logout" />
+                  </IconMenu>
+                </div>
+           </ToolbarGroup>
       ) : (
-        <div className="top-bar-right">
-         <RaisedButton style={{alignSelf: 'center',margin:'5'}} containerElement={<Link to="/login" />} label="Login" />
-          <RaisedButton style={{alignSelf: 'center',margin:'5'}} primary containerElement={<Link to="/signup" />} label="Signup" />
-          
-        </div>
+    
+        <ToolbarGroup>
+
+     </ToolbarGroup>
       )}
-
-             
-
-         
-            </ToolbarGroup>
           </Toolbar>
           </Paper>
     { /* child component will be rendered here */ }

@@ -10,7 +10,7 @@ const styles = {
     width: 300,
   },
 };
-const SignUpForm = ({
+const UserRequestForm = ({
   handleChange,
   onSubmit,
   onChange,
@@ -20,14 +20,23 @@ const SignUpForm = ({
 }) => (
   <Card className="container">
     <form action="/" onSubmit={onSubmit}>
-      <h2 className="card-heading">Sign Up</h2>
+      <h2 className="card-heading">User Request Form</h2>
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       <div className="field-line">
         <TextField
-          floatingLabelText="Name"
+          floatingLabelText=" Username"
           name="name"
+          errorText={errors.name}
+          onChange={onChange}
+          value={user.name}
+        />
+      </div>
+       <div className="field-line">
+        <TextField
+          floatingLabelText=" User Group"
+          name="usergroup"
           errorText={errors.name}
           onChange={onChange}
           value={user.name}
@@ -78,7 +87,7 @@ const SignUpForm = ({
   </Card>
 );
 
-SignUpForm.propTypes = {
+UserRequestForm.propTypes = {
   handleChange:PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -87,5 +96,5 @@ SignUpForm.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default SignUpForm;
+export default UserRequestForm;
 

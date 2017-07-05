@@ -1,5 +1,5 @@
 import { ref, firebaseAuth } from '../config/firebase'
-
+const FixedURL="http://localhost:3000/api";
 export const SET_USERS = 'SET_USERS';
 export const ADD_USER = 'ADD_USER';
 export const USER_FETCHED = 'USER_FETCHED';

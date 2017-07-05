@@ -3,6 +3,7 @@ import HomePage from './components/HomePage.js';
 import DashboardPage from './containers/DashboardPage.js';
 import SchedulePage from './components/Schedule.js';
 import MetricPage from './components/Metric.js';
+import ProfilePage from './components/Profile.js';
 import UploadPage from './components/Upload.js';
 import LoginPage from './containers/LoginPage.js';
 import SignUpPage from './containers/SignUpPage.js';
@@ -20,7 +21,7 @@ const routes = {
         if (Auth.isUserAuthenticated()) {
           callback(null, DashboardPage);
         } else {
-          callback(null, HomePage);
+          callback(null, LoginPage);
         }
       }
     },
@@ -38,6 +39,10 @@ const routes = {
     {
     path: '/upload',
     component:UploadPage
+  },
+  {
+    path:'/profile',
+    component:ProfilePage
   },
   {
     path:'/metrics',
