@@ -14,76 +14,76 @@ const UserRequestForm = ({
   handleChange,
   onSubmit,
   onChange,
-  errors,
+
   user,
   value,
 }) => (
   <Card className="container">
-    <form action="/" onSubmit={onSubmit}>
+    <form className="container" action="/" onSubmit={onSubmit}>
       <h2 className="card-heading">User Request Form</h2>
-
-      {errors.summary && <p className="error-message">{errors.summary}</p>}
-
       <div className="field-line">
         <TextField
-          floatingLabelText=" Username"
-          name="name"
-          errorText={errors.name}
+          floatingLabelText="Username"
+          name="Username"
           onChange={onChange}
-          value={user.name}
+         
         />
       </div>
-       <div className="field-line">
+  <div className="field-line">
         <TextField
-          floatingLabelText=" User Group"
-          name="usergroup"
-          errorText={errors.name}
+          floatingLabelText="User Group"
+          name="User Group"
           onChange={onChange}
-          value={user.name}
+         
+        />
+      </div>
+      <div className="field-line">
+        <TextField
+          floatingLabelText="Application"
+          name="Application"
+          onChange={onChange}
+        />
+      </div>
+      <div className="field-line">
+        <TextField
+          floatingLabelText="Requesting Role"
+          name="Requesting Role"
+          onChange={onChange}
         />
       </div>
 
-      <div className="field-line">
-        <TextField
-          floatingLabelText="Email"
-          name="email"
-          errorText={errors.email}
-          onChange={onChange}
-          value={user.email}
-        />
-      </div>
- <div >
+           <div>
         <SelectField
-          floatingLabelText="Select role"
+          floatingLabelText="Action"
           value={value}
-          name="role"
+          name="action"
           onChange={handleChange}
           style={styles.customWidth}
         >
           <MenuItem value={1} primaryText="Plant Coordinator" />
           <MenuItem value={2} primaryText="Site Coordinator" />
           <MenuItem value={3} primaryText="Site Reviewer" />
-          
         </SelectField>
-        
       </div>
-      <div className="field-line">
-        <TextField
-          floatingLabelText="Password"
-          type="password"
-          name="password"
-          onChange={onChange}
-          errorText={errors.password}
-          value={user.password}
-        />
+           <div>
+        <SelectField
+          floatingLabelText="Modules"
+          value={value}
+          name="modules"
+          onChange={handleChange}
+          style={styles.customWidth}
+        >
+          <MenuItem value={1} primaryText="Plant Coordinator" />
+          <MenuItem value={2} primaryText="Site Coordinator" />
+          <MenuItem value={3} primaryText="Site Reviewer" />
+        </SelectField>
       </div>
 
       <div className="button-line">
         <RaisedButton type="submit" label="Create New Account" primary />
       </div>
 
-      <CardText>Already have an account? <Link to={'/login'}>Log in</Link></CardText>
-    </form>
+   </form>
   </Card>
 );
 

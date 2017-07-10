@@ -12,7 +12,7 @@ const LoginForm = ({
   successMessage,
   user
 }) => (
-  <Card className="container">
+  <Card className="login-container">
     <form action="/" onSubmit={onSubmit}>
       <h2 className="card-heading">Login</h2>
 
@@ -45,6 +45,7 @@ const LoginForm = ({
       </div>
 
       <CardText>Don't have an account? <Link to={'/signup'}>Create one</Link>.</CardText>
+        <CardText>Don't have an account? <Link to={'/userreques'}>User Request</Link>.</CardText>
     </form>
   </Card>
 );

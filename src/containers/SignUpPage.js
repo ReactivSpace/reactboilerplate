@@ -15,9 +15,12 @@ class SignUpPage extends React.Component {
       value: 1,
       errors: {},
       user: {
+        firstName:'',
+        lastName:'',
         email: '',
-        username: '',
+        userName: '',
         password: '',
+        confirmPassword:'',
         role:''
       }
     };
@@ -35,16 +38,20 @@ class SignUpPage extends React.Component {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
     // create a string for an HTTP body message
-    const name = encodeURIComponent(this.state.user.name);
+    const firstName = encodeURIComponent(this.state.user.firstName);
+    const lastName = encodeURIComponent(this.state.user.lastName);
+    const userName = encodeURIComponent(this.state.user.userName);
     const email = encodeURIComponent(this.state.user.email);
     const password = encodeURIComponent(this.state.user.password);
+    const confirmPassword = encodeURIComponent(this.state.user.confirmPassword);
     const role = encodeURIComponent(this.state.value);
-    const emailVerified = true;
-    const formData = `username=${name}&email=${email}&password=${password}&emailVerified=${emailVerified}`;
-
+    // const emailVerified = false;
+  const formData = `firstName=${firstName}&lastName=${lastName}&userName=${userName}&email=${email}&password=${password}&confirmPassword=${confirmPassword}&UserRoleId=${role}`;
+  console.log(role);
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('post', 'http://localhost:3000/api/Users');
+      //  xhr.open('post', 'http://localhost:3000/api/Users');
+    xhr.open('post', 'http://localhost:3000/api/v1/user/signUp');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
@@ -55,20 +62,20 @@ class SignUpPage extends React.Component {
         this.setState({
           errors: {}
         });
-
         // set a message
         localStorage.setItem('successMessage', "User created!");
         debugger;
-       console.log(xhr.response);
+       console.log(xhr.response.data);
        console.log(role);
         const xhr2 = new XMLHttpRequest();
-        xhr2.open('post', 'http://localhost:3000/api/RoleMappings');
+          // xhr2.open('post', 'http://localhost:3000/api/RoleMappings');
+        xhr2.open('post', 'http://localhost:3000/api/v1/user/userRole');
         xhr2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr2.responseType = 'json';
-        const principalType = "UserRole";
-        const principalId = xhr.response.id;
-        const roleId = role;
-        const formData2 = `principalType=${principalType}&principalId=${principalId}&roleId=${role}`;
+        const name = role;
+        const UserId = xhr.response.data.id;
+       // const roleId = role;
+        const formData2 = `name=${name}&UserId=${UserId}&RoleId=${role}`;
         
         xhr2.send(formData2);
 
@@ -79,7 +86,7 @@ class SignUpPage extends React.Component {
         // failure
 
         const errors = xhr.response.errors ? xhr.response.errors : {};
-        errors.summary = "xhr.response.message";
+        errors.summary = xhr.response.message;
 
         this.setState({
           errors

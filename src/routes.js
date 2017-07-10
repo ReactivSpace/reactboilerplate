@@ -4,9 +4,13 @@ import DashboardPage from './containers/DashboardPage.js';
 import SchedulePage from './components/Schedule.js';
 import MetricPage from './components/Metric.js';
 import ProfilePage from './components/Profile.js';
+import ListUserPage from './containers/UserPage.js';
 import UploadPage from './components/Upload.js';
 import LoginPage from './containers/LoginPage.js';
 import SignUpPage from './containers/SignUpPage.js';
+import FormPage from './containers/FormPage.js';
+import UserFormPage from './containers/UserFormPage';
+import UserRequesPage from './components/UserRequestForm.js';
 import Auth from './modules/Auth';
 
 
@@ -45,6 +49,19 @@ const routes = {
     component:ProfilePage
   },
   {
+path:'/listuser',
+component:ListUserPage
+  },{
+    path:'form',
+    component:FormPage
+  },
+  {
+    path: 'user/:id',
+    component: UserFormPage
+  }
+
+  ,
+  {
     path:'/metrics',
     component:MetricPage
   },
@@ -56,7 +73,8 @@ component: SchedulePage
       path: '/logout',
       onEnter: (nextState, replace) => {
         Auth.deauthenticateUser();
-
+      Auth.deAuthenticateUserObject();
+      Auth.deRoleUser();
         // change the current URL to /
         replace('/');
       }

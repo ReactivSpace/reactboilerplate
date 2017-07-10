@@ -18,7 +18,7 @@ const SignUpForm = ({
   user,
   value,
 }) => (
-  <Card className="container">
+  <Card className="login-container">
     <form action="/" onSubmit={onSubmit}>
       <h2 className="card-heading">Sign Up</h2>
 
@@ -26,11 +26,29 @@ const SignUpForm = ({
 
       <div className="field-line">
         <TextField
-          floatingLabelText="Name"
-          name="name"
-          errorText={errors.name}
+          floatingLabelText="firstName"
+          name="firstName"
+          errorText={errors.firstName}
           onChange={onChange}
-          value={user.name}
+          value={user.firstName}
+        />
+      </div>
+            <div className="field-line">
+        <TextField
+          floatingLabelText="lastName"
+          name="lastName"
+          errorText={errors.lastName}
+          onChange={onChange}
+          value={user.lastName}
+        />
+      </div>
+      <div className="field-line">
+        <TextField
+          floatingLabelText="userName"
+          name="userName"
+          errorText={errors.userName}
+          onChange={onChange}
+          value={user.userName}
         />
       </div>
 
@@ -51,9 +69,9 @@ const SignUpForm = ({
           onChange={handleChange}
           style={styles.customWidth}
         >
-          <MenuItem value={1} primaryText="Plant Coordinator" />
-          <MenuItem value={2} primaryText="Site Coordinator" />
-          <MenuItem value={3} primaryText="Site Reviewer" />
+          <MenuItem value={3} primaryText="Plant Coordinator" />
+          <MenuItem value={18} primaryText="Site Coordinator" />
+          <MenuItem value={21} primaryText="Site Reviewer" />
           
         </SelectField>
         
@@ -66,6 +84,16 @@ const SignUpForm = ({
           onChange={onChange}
           errorText={errors.password}
           value={user.password}
+        />
+      </div>
+            <div className="field-line">
+        <TextField
+          floatingLabelText="confirmPassword"
+          type="confirmPassword"
+          name="confirmPassword"
+          onChange={onChange}
+          errorText={errors.confirmPassword}
+          value={user.confirmPassword}
         />
       </div>
 

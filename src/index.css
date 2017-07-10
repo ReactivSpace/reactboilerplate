@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-size: 16px;
+  font-size: 16px; background-color: #efefef;
 }
 
 a {
@@ -17,7 +17,10 @@ a:hover {
 .text-center {
   text-align: center;
 }
-
+.drawer{
+    width: 230px;
+    backgroundColor:grey
+  }
 .top-bar {
   padding: 10px 15px;
   margin-bottom: 50px;
@@ -43,11 +46,17 @@ a:hover {
 }
 
 .container {
+    margin: 0 auto;
+    text-align: center;
+    width: 1000px;
+    /*float: center;*/
+    margin-right: 75px;
+}
+.login-container {
   margin: 0 auto;
   text-align: center;
   width: 700px;
 }
-
 .card-heading {
   padding: 16px;
 }

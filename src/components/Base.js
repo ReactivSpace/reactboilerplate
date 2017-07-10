@@ -21,6 +21,8 @@ import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-
 import Avatar from 'material-ui/Avatar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 // import FlatButton from 'material-ui/FlatButton';
+import Header from '../components/Header';
+import LeftDrawer from '../components/LeftDrawer';
 import Paper from 'material-ui/Paper';
 import {spacing, typography} from 'material-ui/styles';
 import {white, blue600} from 'material-ui/styles/colors';
@@ -86,54 +88,17 @@ const Base = ({ children }) => (
         </div>
      </ToolbarGroup>
             {Auth.isUserAuthenticated() ? (
+
                  <ToolbarGroup>
-          <Drawer width={300}>
-            <div style={titleStyles.logo}>
-          User Admin App
-        </div>
-        <div style={titleStyles.avatar.div}>
-          <Avatar src="https://image.flaticon.com/icons/png/512/78/78373.png"
-                  size={50}
-                  style={titleStyles.avatar.icon}/>
-          <span style={titleStyles.avatar.span}>Hello! Ashwin</span>
-        </div>
-            <MenuItem>  
-            <ListItem value={1}primaryText="Schedule"nestedItems={[
-             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
-             <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
-             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>
-            ]}/>
-            <ListItem value={1}primaryText="Upload"nestedItems={[
-            <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
-            <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
-            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
-            ]}/>
-            <ListItem value={1}primaryText="Metrics"nestedItems={[
-             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
-             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
-            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,]}/>
-           </MenuItem>
-         </Drawer>
+                       <LeftDrawer/>
            <div style={titleStyles.iconsRightContainer}>
-                  <IconMenu color={white}
-                            iconButtonElement={
-                              <IconButton><ViewModule color={white}/></IconButton>
-                            }
-                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                  >
-                    <MenuItem key={1} primaryText="Application 1"/>
-                    <MenuItem key={2} primaryText="Application 2"/>
-                    <MenuItem key={3} primaryText="Application 3"/>
-                  </IconMenu>
-            <IconMenu color={white}
-                            iconButtonElement={
+            <IconMenu color={white}iconButtonElement={
                               <IconButton>
                                 <MoreVertIcon color={white}/></IconButton>
                             }
                             targetOrigin={{horizontal: 'right', vertical: 'top'}}
                             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                  >
+          >
             <MenuItem containerElement={<Link to="/profile" />}  primaryText="Profile" />
             <MenuItem containerElement={<Link to="/logout" />} primaryText="Logout" />
                   </IconMenu>
