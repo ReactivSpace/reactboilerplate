@@ -1,6 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
-
+import { Card, CardText } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 class UserForm extends React.Component {
 
@@ -27,7 +31,7 @@ class UserForm extends React.Component {
             emailAddress:nextProps.user.emailAddress,
             UserRoleId:nextProps.user.UserRoleId
         });
-           console.log(nextProps);
+           //this.alert(nextProps);
     }
     
 
@@ -49,61 +53,106 @@ class UserForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-
         //validation
         let errors = {};
-        if (this.state.title === '') 
-            errors.title = "Can't be empty";
-        if (this.state.cover === '') 
-            errors.cover = "Can't be empty";
+        if (this.state.userFullName === '') 
+            errors.userFullName = "Can't be empty";
+                if (this.state.userFirstName === '') 
+            errors.userFirstName = "Can't be empty";
+                if (this.state.userLastName === '') 
+            errors.userLastName = "Can't be empty";
+                if (this.state.userName === '') 
+            errors.userName = "Can't be empty";
+                if (this.state.emailAddress === '') 
+            errors.emailAddress = "Can't be empty";
+                if (this.state.UserRoleId === '') 
+            errors.UserRoleId = "Can't be empty";
         this.setState({errors});
         const isValid = Object.keys(errors).length === 0;
         if (isValid) {
-            const {id,title, cover} = this.state;
+            const {id,userFullName, userFirstName,userLastName,userName,emailAddress,UserRoleId} = this.state;
             this.setState({loading:true});
-         this.props.saveUser({id,title,cover})
+         this.props.saveUser({id,userFullName, userFirstName,userLastName,userName,emailAddress,UserRoleId})
          .catch((err)=>err.response.json().then(({errors}) => this.setState({errors,loading:false})))
         }
     }
 
     render() {
-        const form=( <form className={classnames('ui', 'form',{loading:this.state.loading})} onSubmit={this.handleSubmit}>
-                <h1>Add New Users</h1>
+        const form=( 
+            <Card className="container">
+
+            <form className={classnames({loading:this.state.loading})} onSubmit={this.handleSubmit}>
+             <h2 className="card-heading">Edit User</h2>
               {!!this.state.errors.global &&<div className="ui negative message"><p>{this.state.errors.global}</p> </div>}
-                <div
-                    className={classnames('field', {
-                    error: !!this.state.errors.title
-                })}>
-                    <label htmlFor="title">Title</label>
-                    <input
-                        name="title"
-                        value={this.state.title}
-                        onChange={this.handleChange}
-                        id="title"/>
-                    <span>{this.state.errors.title}</span>
-                </div>
+  <div className="field-line">
+        <TextField
+          floatingLabelText="userFullName"
+          name="userFullName"
+          errorText={!!this.state.errors.userFullName}
+          onChange={this.handleChange}
+          value={this.state.userFullName}
+        />
+     </div>
+    <div className="field-line">
+        <TextField floatingLabelText="userFirstName"
+          name="userFirstName"
+          errorText={!!this.state.errors.userFirstName}
+         onChange={this.handleChange}
+          value={this.state.userFirstName} />
+     </div>
 
-                <div
-                    className={classnames('field', {
-                    error: !!this.state.errors.cover
-                })}>
-                    <label htmlFor="cover">Cover</label>
-                    <input
-                        name="cover"
-                        value={this.state.cover}
-                        onChange={this.handleChange}
-                        id="cover"/>
-                    <span>{this.state.errors.cover}</span>
-                </div>
-                <div className="field">
-                    {this.state.cover !== '' && <img src={this.state.cover} alt="cover" className="ui small bordered image"/>}
+      <div className="field-line">
+        <TextField
+          floatingLabelText="userLastName"
+          name="userLastName"
+          errorText={!!this.state.errors.userLastName}
+         onChange={this.handleChange}
+          value={this.state.userLastName}/>
+     </div>
 
-                </div>
-                <div className="field">
-                    <button className="ui primary button">Save</button>
+         <div className="field-line">
+        <TextField
+          floatingLabelText="userLastName"
+          name="userLastName"
+          errorText={!!this.state.errors.userLastName}
+         onChange={this.handleChange}
+          value={this.state.userLastName}/>
+     </div>
+    <div className="field-line">
+        <TextField floatingLabelText="userName"
+          name="userName"
+          errorText={!!this.state.errors.userName}
+         onChange={this.handleChange}
+          value={this.state.userName}/> 
+          </div>
 
-                </div>
-            </form>);
+          <div className="field-line">
+        <TextField
+          floatingLabelText="emailAddress"
+          name="emailAddress"
+          errorText={!!this.state.errors.emailAddress}
+         onChange={this.handleChange}
+          value={this.state.emailAddress}/>
+     </div>
+      <div >
+        <SelectField
+          floatingLabelText="Select role"
+          value={this.value}
+          name="role"
+          onChange={this.handleChange}
+          >
+          <MenuItem value={3} primaryText="Plant Coordinator" />
+          <MenuItem value={18} primaryText="Site Coordinator" />
+          <MenuItem value={21} primaryText="Site Reviewer" />
+          
+        </SelectField>
+        
+      </div>
+  <div className="button-line">
+        <RaisedButton type="submit" label="Update Account" primary />
+      </div>
+            </form>
+             </Card>);
         return (
            <div>
                {form}

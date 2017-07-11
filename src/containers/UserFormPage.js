@@ -33,8 +33,7 @@ render(){
             {
               this.state.redirect?   
               <Redirect to="/users" />:
-              <UserForm 
-              user={this.props.user}
+              <UserForm user={this.props.user}
               saveUser={this.saveUser}
               />
             }
