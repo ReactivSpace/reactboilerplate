@@ -90,7 +90,7 @@ const Base = ({ children }) => (
             {Auth.isUserAuthenticated() ? (
 
                  <ToolbarGroup>
-                       <LeftDrawer/>
+                       <LeftDrawer roles={Auth.getRoleUser}/>
            <div style={titleStyles.iconsRightContainer}>
             <IconMenu color={white}iconButtonElement={
                               <IconButton>

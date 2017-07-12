@@ -18,8 +18,9 @@ class Auth {
   static isAuthenticateUserObject() {
      return localStorage.getItem('userObj');
   }
-    static RoleUser() {
-    return localStorage.getItem('RoleId');
+    static getRoleUser() {
+      var roleId=localStorage.getItem("RoleId");
+    return roleId;
   }
   /**
    * Check if a user is authenticated - check if a token is saved in Local Storage

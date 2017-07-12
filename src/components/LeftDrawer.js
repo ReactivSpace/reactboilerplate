@@ -9,6 +9,46 @@ import {Link} from 'react-router';
 import Avatar from 'material-ui/Avatar';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 const LeftDrawer = (props) => {
+  const roleId=Auth.getRoleUser();
+ var partial;
+if(roleId==18){
+partial=<div>
+         <ListItem value={1}primaryText="Upload"nestedItems={[
+            <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
+            <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
+            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
+            ]}/> </div>
+} else if (roleId==21)
+{
+  partial=<div>
+    <ListItem value={1}primaryText="Metrics"nestedItems={[
+             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
+             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
+            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,]}/>
+        </div>
+}
+else {
+    partial=       <div>
+            <ListItem value={1}primaryText="Schedule"nestedItems={[
+             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
+             <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
+             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>
+            ]}/>
+
+            <ListItem value={1}primaryText="Upload"nestedItems={[
+            <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
+            <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
+            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
+            ]}/>
+
+           <ListItem value={1}primaryText="Metrics"nestedItems={[
+             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
+             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
+            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,]}/>
+            <ListItem value={1}primaryText="User Management"nestedItems={[
+             <ListItem  value={2} primaryText="User List" containerElement={<Link to="/listuser" />}/>,]}/>
+        </div>
+}
   let { navDrawerOpen } = props;
   const titleStyles = {
     logo: {
@@ -62,26 +102,7 @@ const LeftDrawer = (props) => {
                   style={titleStyles.avatar.icon}/>
           <span style={titleStyles.avatar.span}> Welcome{Auth.isUserAuthenticated}</span>
         </div>   
-           {Auth.RoleUser===3? (
-            <ListItem value={1}primaryText="Schedule"nestedItems={[
-             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
-             <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
-             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>
-            ]}/>
-            ):(
-            <ListItem value={1}primaryText="Upload"nestedItems={[
-            <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
-            <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
-            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,
-            ]}/>
-            )}
-           <ListItem value={1}primaryText="Metrics"nestedItems={[
-             <ListItem  value={2} primaryText="upload" containerElement={<Link to="/upload" />}/>,
-             <ListItem  value={2} primaryText="schedule" containerElement={<Link to="/schedule" />}/>,
-            <ListItem  value={2} primaryText="metrics" containerElement={<Link to="/metrics" />}/>,]}/>
-            <ListItem value={1}primaryText="User Management"nestedItems={[
-             <ListItem  value={2} primaryText="User List" containerElement={<Link to="/listuser" />}/>,]}/>
-        
+   {partial}
          </Drawer>
   );
 };

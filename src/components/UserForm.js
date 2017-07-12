@@ -7,8 +7,9 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 class UserForm extends React.Component {
-
+debugger;
     state = {
+        
         id: this.props.user ? this.props.user.id : null,
         userFullName: this.props.user ? this.props.user.userFullName :'',
         userFirstName: this.props.user ? this.props.user.userFirstName :'',
@@ -20,16 +21,17 @@ class UserForm extends React.Component {
         loading:false
        
     }
- 
+ debugger;
     componentWillReceiveProps=(nextProps)=>{
+        debugger;
         this.setState({
-            id:nextProps.user.id,
-            userFullName:nextProps.user.userFullName,
-            userFirstName:nextProps.user.userFirstName,
-            userLastName:nextProps.user.userLastName,
-            userName:nextProps.user.userName,
-            emailAddress:nextProps.user.emailAddress,
-            UserRoleId:nextProps.user.UserRoleId
+            id:nextProps.user.data.id,
+            userFullName:nextProps.user.data.userFullName,
+            userFirstName:nextProps.user.data.userFirstName,
+            userLastName:nextProps.user.data.userLastName,
+            userName:nextProps.user.data.userName,
+            emailAddress:nextProps.user.data.emailAddress,
+            UserRoleId:nextProps.user.data.UserRoleId
         });
            //this.alert(nextProps);
     }
@@ -37,7 +39,6 @@ class UserForm extends React.Component {
 
     handleChange = (e) => {
         if (!!this.state.errors[e.target.name]) {
-
             let errors = Object.assign({}, this.state.errors);
             delete errors[e.target.name];
             this.setState({
@@ -52,6 +53,7 @@ class UserForm extends React.Component {
     }
 
     handleSubmit = (e) => {
+        debugger;
         e.preventDefault();
         //validation
         let errors = {};
@@ -72,8 +74,9 @@ class UserForm extends React.Component {
         if (isValid) {
             const {id,userFullName, userFirstName,userLastName,userName,emailAddress,UserRoleId} = this.state;
             this.setState({loading:true});
+            debugger;
          this.props.saveUser({id,userFullName, userFirstName,userLastName,userName,emailAddress,UserRoleId})
-         .catch((err)=>err.response.json().then(({errors}) => this.setState({errors,loading:false})))
+        // .catch((err)=>err.response.json(err).then(({errors}) => this.setState({errors,loading:false})));
         }
     }
 
@@ -83,7 +86,8 @@ class UserForm extends React.Component {
 
             <form className={classnames({loading:this.state.loading})} onSubmit={this.handleSubmit}>
              <h2 className="card-heading">Edit User</h2>
-              {!!this.state.errors.global &&<div className="ui negative message"><p>{this.state.errors.global}</p> </div>}
+              {!!this.state.errors.global && <p className="error-message">{this.state.errors.global}</p>}
+
   <div className="field-line">
         <TextField
           floatingLabelText="userFullName"
@@ -109,16 +113,7 @@ class UserForm extends React.Component {
          onChange={this.handleChange}
           value={this.state.userLastName}/>
      </div>
-
          <div className="field-line">
-        <TextField
-          floatingLabelText="userLastName"
-          name="userLastName"
-          errorText={!!this.state.errors.userLastName}
-         onChange={this.handleChange}
-          value={this.state.userLastName}/>
-     </div>
-    <div className="field-line">
         <TextField floatingLabelText="userName"
           name="userName"
           errorText={!!this.state.errors.userName}
@@ -137,7 +132,7 @@ class UserForm extends React.Component {
       <div >
         <SelectField
           floatingLabelText="Select role"
-          value={this.value}
+          value={this.state.UserRoleId}
           name="role"
           onChange={this.handleChange}
           >

@@ -7,10 +7,11 @@ export default function users(state = [], action = {}) {
                 action.user
             ];
             case USER_DELETED:
-            return state.filter(item=>item._id!==action.userId);
+            return state.filter(item=>item.data.id!==action.userId);
             case USER_UPDATED:
             return state.map(item=>{
-                if(item.id===action.user._id) return action.user;
+                debugger;
+                if(item.data.id===action.user.id) return action.user;
                 return item;
             });
 

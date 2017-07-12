@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router';
+import { Redirect } from 'react-router';
 import {saveUser ,fetchUser, updateUser} from '../actions/userActions';
 import UserForm from '../components/UserForm';
 
@@ -10,18 +10,17 @@ redirect:false
   }
     componentDidMount=()=>{
         if(this.props.params.id){
-            this.props.fetchUser(this.props.params.id);
+          this.props.fetchUser(this.props.params.id);
         }
     }
 
-    saveUser=({id,title,cover})=>{
+    saveUser=({id,userFullName, userFirstName,userLastName,userName,emailAddress,UserRoleId})=>{
           if(id){
-            return this.props.updateUser({id,title, cover}).then(
-                        ()=>{this.setState({redirect :true})},
-                       
+            return this.props.updateUser({id,userFullName, userFirstName,userLastName,userName,emailAddress,UserRoleId}).then(
+                        ()=>{this.setState({ redirect :true  })},                       
                     );
            }else{
-           return this.props.saveUser({title, cover}).then(
+           return this.props.saveUser({userFullName, userFirstName,userLastName,userName,emailAddress,UserRoleId}).then(
                ()=>{this.setState({redirect:true})},
            
            );
@@ -32,7 +31,7 @@ render(){
           <div>
             {
               this.state.redirect?   
-              <Redirect to="/users" />:
+              <Redirect to="/listuser" />:
               <UserForm user={this.props.user}
               saveUser={this.saveUser}
               />
@@ -43,8 +42,10 @@ render(){
 }
 function mapStateToProps(state, props) {
   if (props.params.id) {
+    
+   
     return {
-      user: state.users.find(item => item.id === props.params.id)
+      user:state.users[0]
     }
   }
 

@@ -15,8 +15,9 @@ export function setUsers(users){
     if(response.ok){
         return response.json();
     } else{
+        debugger;
         let error = new Error(response.statusText);
-        error.response =response;
+        error.response =response.statusText;
         throw error;
     }
 }
@@ -61,14 +62,15 @@ export function saveUser(data){
 };
 export function updateUser(data) {
   return dispatch => {
-    return fetch(`/api/users/${data._id}`, {
+      debugger;
+    return fetch(`http://localhost:3000/api/v1/user/updateUserbyId`, {
       method: 'put',
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json"
       }
     }).then(handleResponse)
-    .then(data => dispatch(userUpdated(data.user)));
+    .then(data => dispatch(userUpdated(data)));
   }
 }
 export function deleteUser(id) {
@@ -90,9 +92,11 @@ export function fetchUsers() {
     }
 };
 export function fetchUser(id) {
+    
     return dispatch => {
         fetch(`http://localhost:3000/api/v1/user/getById/${id}`)
         .then(res=>res.json())
         .then(data => dispatch(userFetched(data)));
+
     }
 };
