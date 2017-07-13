@@ -1,5 +1,5 @@
 import React from 'react';
-import UserList from '../components/ListUserPage';
+import UserList from '../components/user/ListUserPage';
 import {connect} from 'react-redux';
 import {fetchUsers,deleteUser} from '../actions/userActions';
 

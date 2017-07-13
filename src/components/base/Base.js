@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
-import Auth from '../modules/Auth';
+import Auth from '../../modules/Auth';
 //
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -21,8 +21,8 @@ import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-
 import Avatar from 'material-ui/Avatar';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 // import FlatButton from 'material-ui/FlatButton';
-import Header from '../components/Header';
-import LeftDrawer from '../components/LeftDrawer';
+import Header from '../Header/Header';
+import LeftDrawer from '../Header/LeftDrawer';
 import Paper from 'material-ui/Paper';
 import {spacing, typography} from 'material-ui/styles';
 import {white, blue600} from 'material-ui/styles/colors';

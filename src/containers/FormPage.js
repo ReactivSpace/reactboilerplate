@@ -8,7 +8,7 @@ import Toggle from 'material-ui/Toggle';
 import DatePicker from 'material-ui/DatePicker';
 import {grey400} from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
-import PageBase from '../components/PageBase';
+import PageBase from '../components/base/PageBase';
 import {Card, CardText } from 'material-ui/Card';
  const styles = {
     toggleDiv: {

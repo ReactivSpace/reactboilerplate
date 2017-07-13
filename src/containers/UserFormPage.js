@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router';
 import {saveUser ,fetchUser, updateUser} from '../actions/userActions';
-import UserForm from '../components/UserForm';
+import UserForm from '../components/user/UserForm';
 
 class UserFormPage extends React.Component {
   state={

@@ -1,5 +1,5 @@
 import React,  { PropTypes } from 'react';
-import Auth from '../modules/Auth';
+import Auth from '../../modules/Auth';
 
 import Drawer from 'material-ui/Drawer';
 import {spacing, typography} from 'material-ui/styles';

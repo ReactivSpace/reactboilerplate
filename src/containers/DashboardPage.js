@@ -3,7 +3,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Auth from '../modules/Auth';
-import Dashboard from '../components/Dashboard.js';
+import Dashboard from '../components/dashboard/Dashboard.js';
 
 
 
